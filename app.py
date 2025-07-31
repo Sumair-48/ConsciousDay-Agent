@@ -1,0 +1,117 @@
+import streamlit as st
+import logging
+from utils.helpers import setup_logging, init_session_state, validate_api_configuration
+from components.auth import AuthManager
+from pages.home import render_home_page
+from pages.history import render_history_page
+from config.settings import Config
+
+# Configure page
+st.set_page_config(
+    page_title=Config.APP_TITLE,
+    page_icon="🌅",
+    layout="wide",
+    initial_sidebar_state="expanded"
+)
+
+# Setup logging
+setup_logging()
+
+# Initialize session state
+init_session_state()
+
+def main():
+    """Main application function."""
+    # Initialize auth manager
+    auth = AuthManager()
+    
+    # Custom CSS
+    st.markdown("""
+    <style>
+    .main-header {
+        text-align: center;
+        padding: 1rem 0;
+        margin-bottom: 2rem;
+    }
+    .sidebar-info {
+        background-color: #f0f2f6;
+        padding: 1rem;
+        border-radius: 0.5rem;
+        margin-bottom: 1rem;
+    }
+    .metric-card {
+        background-color: #ffffff;
+        padding: 1rem;
+        border-radius: 0.5rem;
+        border: 1px solid #e0e0e0;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+    
+    # Header
+    st.markdown(f"""
+    <div class="main-header">
+        <h1>🌅 {Config.APP_TITLE}</h1>
+        <p><em>{Config.APP_TAGLINE}</em></p>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    # Check API configuration
+    if not validate_api_configuration():
+        st.error("⚠️ API configuration missing. Please set your OPENROUTER_API_KEY in environment variables.")
+        st.info("The app will still work but will provide fallback responses instead of AI-generated insights.")
+    
+    # Authentication check
+    if not auth.is_authenticated():
+        st.info("🔐 Please log in to access your personal journal.")
+        auth.login_form()
+        return
+    
+    # Sidebar navigation
+    with st.sidebar:
+        user_info = auth.get_user_info()
+        st.markdown(f"""
+        <div class="sidebar-info">
+            <h3>👋 Welcome, {user_info['name']}!</h3>
+            <p>Ready for today's reflection?</p>
+        </div>
+        """, unsafe_allow_html=True)
+        
+        # Navigation
+        st.markdown("### 🧭 Navigation")
+        page = st.radio(
+            "Choose a page:",
+            ["🌅 Daily Reflection", "📚 Journal History"],
+            help="Navigate between creating new entries and viewing past reflections"
+        )
+        
+        # Logout button
+        st.markdown("---")
+        if st.button("🚪 Logout", type="secondary"):
+            auth.logout()
+        
+        # App info
+        st.markdown("---")
+        st.markdown("### ℹ️ About")
+        st.markdown("""
+        **ConsciousDay Agent** helps you:
+        - Process morning thoughts & feelings
+        - Understand your dreams
+        - Set clear daily intentions
+        - Create mindful action strategies
+        """)
+        
+        # API status
+        if validate_api_configuration():
+            st.success("🤖 AI Agent: Connected")
+        else:
+            st.warning("🤖 AI Agent: Fallback Mode")
+    
+    # Main content area
+    if page == "🌅 Daily Reflection":
+        render_home_page()
+    elif page == "📚 Journal History":
+        render_history_page()
+
+if __name__ == "__main__":
+    main()

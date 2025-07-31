@@ -1,0 +1,24 @@
+2025-07-31 23:56:01,121 - root - WARNING - No API key found. Agent will not function properly.
+2025-07-31 23:56:01,156 - root - INFO - Database initialized successfully
+2025-07-31 23:56:27,029 - root - INFO - Database initialized successfully
+2025-07-31 23:56:34,168 - root - WARNING - No API key found. Agent will not function properly.
+2025-07-31 23:56:34,181 - root - INFO - Database initialized successfully
+2025-08-01 00:02:59,640 - root - INFO - Database initialized successfully
+2025-08-01 00:03:06,153 - root - INFO - Database initialized successfully
+2025-08-01 00:03:18,366 - root - INFO - Database initialized successfully
+2025-08-01 00:05:03,581 - root - INFO - Database initialized successfully
+2025-08-01 00:05:13,524 - root - INFO - Entry saved for date: 2025-08-02
+2025-08-01 00:06:28,229 - root - INFO - Database initialized successfully
+2025-08-01 00:06:33,941 - root - INFO - Database initialized successfully
+2025-08-01 00:14:45,975 - root - INFO - Database initialized successfully
+2025-08-01 00:19:21,554 - root - INFO - Database initialized successfully
+2025-08-01 00:19:22,438 - root - ERROR - API request failed: 401 - {"error":{"message":"No auth credentials found","code":401}}
+2025-08-01 00:19:22,470 - root - INFO - Entry saved for date: 2025-08-05
+2025-08-01 00:19:27,792 - root - INFO - Database initialized successfully
+2025-08-01 00:19:32,257 - root - INFO - Database initialized successfully
+2025-08-01 00:19:35,630 - root - INFO - Database initialized successfully
+2025-08-01 00:19:39,823 - root - INFO - Database initialized successfully
+2025-08-01 00:19:48,925 - root - INFO - Database initialized successfully
+2025-08-01 00:19:56,768 - root - INFO - Database initialized successfully
+2025-08-01 00:20:09,504 - root - INFO - Database initialized successfully
+2025-08-01 00:20:33,503 - root - INFO - Database initialized successfully
