@@ -380,12 +380,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 3. **New Issue**: Create detailed bug report or feature request
 4. **Discussions**: Use GitHub Discussions for questions
 
-### Contact
-
-- **GitHub Issues**: For bugs and feature requests
-- **Email**: your-email@example.com
-- **Twitter**: @yourusername
-
 ---
 
 **Built with ❤️ for mindful daily reflection and intentional living.**
