@@ -5,8 +5,8 @@ load_dotenv()
 
 class Config:
     # Database
-    DATABASE_PATH = "entries.db"
-    
+
+    DATABASE_PATH = os.getenv("DATABASE_PATH")
     # API Configuration
     OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY")
     OPENROUTER_BASE_URL = "https://openrouter.ai/api/v1"

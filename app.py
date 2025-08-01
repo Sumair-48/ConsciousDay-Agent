@@ -129,7 +129,6 @@ def main():
             st.warning("🤖 AI Agent: Fallback Mode")
 
 
-        render_history_page()
     # Main content area
     if page == "🌅 Daily Reflection":
         render_home_page()
