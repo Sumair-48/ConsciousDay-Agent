@@ -1,4 +1,5 @@
 import streamlit as st
+import os
 from utils.helpers import setup_logging, init_session_state, validate_api_configuration
 from components.auth import AuthManager
 from pages.home import render_home_page
@@ -23,13 +24,19 @@ def main():
     """Main application function."""
     # Initialize auth manager
     try:
-        # Access secrets through streamlit
-        if not st.secrets["OPENROUTER_API_KEY"]:
-            raise ValueError("OPENROUTER_API_KEY not found in secrets")
+        # Try to access secrets, fallback to environment variables
+        try:
+            api_key = st.secrets["OPENROUTER_API_KEY"]
+        except (KeyError, st.errors.StreamlitSecretNotFoundError):
+            api_key = os.getenv("OPENROUTER_API_KEY")
+            
+        if not api_key:
+            raise ValueError("OPENROUTER_API_KEY not found in secrets or environment")
+            
         Config.validate_config()
-    except (ValueError, KeyError) as e:
+    except ValueError as e:
         st.error(f"Configuration Error: {str(e)}")
-        st.info("Please configure the required secrets in Streamlit Cloud settings.")
+        st.info("Please configure the required secrets in .streamlit/secrets.toml or Streamlit Cloud settings.")
         return
     
     auth = AuthManager()
