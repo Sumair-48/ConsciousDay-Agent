@@ -6,15 +6,10 @@ load_dotenv()
 
 class Config:
     # Database
-
-    # DATABASE_PATH = st.secrets["DATABASE_PATH"]
-    # # API Configuration
-    # OPENROUTER_API_KEY = st.secrets["OPENROUTER_API_KEY"]
-    # OPENROUTER_BASE_URL = "https://openrouter.ai/api/v1"
-    DATABASE_PATH = st.secrets.get("DATABASE_PATH", "entries.db")
+    DATABASE_PATH = "entries.db"
     
     # API Configuration
-    OPENROUTER_API_KEY = st.secrets.get("OPENROUTER_API_KEY", os.getenv("OPENROUTER_API_KEY"))
+    OPENROUTER_API_KEY = st.secrets["OPENROUTER_API_KEY"]
     OPENROUTER_BASE_URL = "https://openrouter.ai/api/v1"
     
     # Model Configuration
@@ -26,21 +21,5 @@ class Config:
     
     # Authentication
     AUTH_COOKIE_NAME = "consciousday_auth"
-    # AUTH_COOKIE_KEY = st.secrets["AUTH_COOKIE_KEY", "consciousday_secret_key"]
-    AUTH_COOKIE_KEY = st.secrets.get("AUTH_COOKIE_KEY", "consciousday_secret_key")
+    AUTH_COOKIE_KEY = st.secrets["AUTH_COOKIE_KEY"]
     AUTH_COOKIE_EXPIRY_DAYS = 30
-
-    @classmethod
-    def validate_config(cls):
-        """Validate required configuration."""
-        missing = []
-        if not cls.OPENROUTER_API_KEY:
-            missing.append("OPENROUTER_API_KEY")
-        if not cls.DATABASE_PATH:
-            missing.append("DATABASE_PATH")
-        if not cls.AUTH_COOKIE_KEY:
-            missing.append("AUTH_COOKIE_KEY")
-            
-        if missing:
-            raise ValueError(f"Missing required environment variables: {', '.join(missing)}")
-        return True

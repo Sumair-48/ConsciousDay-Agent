@@ -1,5 +1,5 @@
 import streamlit as st
-import os
+import logging
 from utils.helpers import setup_logging, init_session_state, validate_api_configuration
 from components.auth import AuthManager
 from pages.home import render_home_page
@@ -23,24 +23,9 @@ init_session_state()
 def main():
     """Main application function."""
     # Initialize auth manager
-    try:
-        # Try to access secrets, fallback to environment variables
-        try:
-            api_key = st.secrets["OPENROUTER_API_KEY"]
-        except (KeyError, st.errors.StreamlitSecretNotFoundError):
-            api_key = os.getenv("OPENROUTER_API_KEY")
-            
-        if not api_key:
-            raise ValueError("OPENROUTER_API_KEY not found in secrets or environment")
-            
-        Config.validate_config()
-    except ValueError as e:
-        st.error(f"Configuration Error: {str(e)}")
-        st.info("Please configure the required secrets in .streamlit/secrets.toml or Streamlit Cloud settings.")
-        return
-    
     auth = AuthManager()
     
+    # Custom CSS
     st.markdown("""
     <style>
     .main-header {
@@ -86,6 +71,7 @@ def main():
     }
     </style>
     """, unsafe_allow_html=True)
+    
     # Header
     st.markdown(f"""
     <div class="main-header">
@@ -144,8 +130,7 @@ def main():
             st.success("🤖 AI Agent: Connected")
         else:
             st.warning("🤖 AI Agent: Fallback Mode")
-
-
+    
     # Main content area
     if page == "🌅 Daily Reflection":
         render_home_page()
