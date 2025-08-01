@@ -4,9 +4,19 @@ from components.display import DisplayManager
 from agent.langchain_agent import ConsciousDayAgent
 from database.db_manager import DatabaseManager
 from database.models import JournalEntry
+from components.auth import AuthManager
 
 def render_home_page():
     """Render the main journaling page."""
+
+    auth = AuthManager()
+    
+    # Check authentication
+    if not auth.is_authenticated():
+        auth.login_form()
+        return
+    
+    
     st.title("🌅 Daily Reflection")
     st.markdown("*Reflect inward. Act with clarity.*")
     

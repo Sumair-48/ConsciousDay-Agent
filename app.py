@@ -1,5 +1,4 @@
 import streamlit as st
-import logging
 from utils.helpers import setup_logging, init_session_state, validate_api_configuration
 from components.auth import AuthManager
 from pages.home import render_home_page
@@ -25,29 +24,51 @@ def main():
     # Initialize auth manager
     auth = AuthManager()
     
-    # Custom CSS
     st.markdown("""
     <style>
     .main-header {
         text-align: center;
         padding: 1rem 0;
         margin-bottom: 2rem;
+        color: #ecf0f1;
     }
     .sidebar-info {
-        background-color: #f0f2f6;
-        padding: 1rem;
-        border-radius: 0.5rem;
+        background: linear-gradient(135deg, #3498db, #2980b9);
+        color: white;
+        padding: 1.2rem;
+        border-radius: 0.7rem;
         margin-bottom: 1rem;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    .sidebar-info h3 {
+        color: #ecf0f1;
+        margin-bottom: 0.5rem;
+        font-weight: 600;
+    }
+    .sidebar-info p {
+        color: #e0e0e0;
+        margin: 0;
     }
     .metric-card {
-        background-color: #ffffff;
-        padding: 1rem;
-        border-radius: 0.5rem;
-        border: 1px solid #e0e0e0;
+        background: linear-gradient(135deg, #e0f7fa, #b2ebf2);
+        padding: 1.2rem;
+        border-radius: 0.7rem;
+        border: none;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+    .stRadio > label {
+        color: #34495e;
+    }
+    .stButton button {
+        background: #3498db;
+        color: white;
+        border: none;
+    }
+    .stButton button:hover {
+        background: #2980b9;
     }
     </style>
     """, unsafe_allow_html=True)
-    
     # Header
     st.markdown(f"""
     <div class="main-header">
@@ -106,7 +127,9 @@ def main():
             st.success("🤖 AI Agent: Connected")
         else:
             st.warning("🤖 AI Agent: Fallback Mode")
-    
+
+
+        render_history_page()
     # Main content area
     if page == "🌅 Daily Reflection":
         render_home_page()

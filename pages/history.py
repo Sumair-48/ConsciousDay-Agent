@@ -2,9 +2,19 @@ import streamlit as st
 from components.forms import DateSelector
 from components.display import DisplayManager
 from database.db_manager import DatabaseManager
+from components.auth import AuthManager 
 
 def render_history_page():
     """Render the history page for viewing previous entries."""
+
+    # Initialize auth
+    auth = AuthManager()
+    
+    # Check authentication
+    if not auth.is_authenticated():
+        auth.login_form()
+        return
+
     st.title("📚 Journal History")
     st.markdown("*Review your journey of self-reflection and growth.*")
     

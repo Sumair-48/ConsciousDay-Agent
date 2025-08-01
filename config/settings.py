@@ -12,7 +12,7 @@ class Config:
     OPENROUTER_BASE_URL = "https://openrouter.ai/api/v1"
     
     # Model Configuration
-    DEFAULT_MODEL = "deepseek/deepseek-chat-v3-0324:free"
+    DEFAULT_MODEL = "anthropic/claude-3-haiku"
     
     # App Configuration
     APP_TITLE = "ConsciousDay Agent"
