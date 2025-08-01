@@ -22,6 +22,16 @@ init_session_state()
 def main():
     """Main application function."""
     # Initialize auth manager
+    try:
+        # Access secrets through streamlit
+        if not st.secrets["OPENROUTER_API_KEY"]:
+            raise ValueError("OPENROUTER_API_KEY not found in secrets")
+        Config.validate_config()
+    except (ValueError, KeyError) as e:
+        st.error(f"Configuration Error: {str(e)}")
+        st.info("Please configure the required secrets in Streamlit Cloud settings.")
+        return
+    
     auth = AuthManager()
     
     st.markdown("""
