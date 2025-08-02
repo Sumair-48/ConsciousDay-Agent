@@ -4,6 +4,8 @@
 
 A journaling-based AI assistant that reads your morning inputs and provides emotional insights and daily strategy recommendations. Built with Streamlit, LangChain, and OpenRouter API.
 
+Link: https://conscious-dayagent.streamlit.app/
+
 ## 🌟 Features
 
 ### Core Functionality
