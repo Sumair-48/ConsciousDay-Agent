@@ -366,13 +366,6 @@ logging.basicConfig(level=logging.DEBUG)
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 🙏 Acknowledgments
-
-- **Streamlit Team**: For the amazing web framework
-- **LangChain**: For the AI agent framework  
-- **OpenRouter**: For providing access to multiple AI models
-- **Open Source Community**: For the tools and libraries used
-
 ## 📞 Support
 
 ### Getting Help
